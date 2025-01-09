@@ -1,17 +1,16 @@
-Harga <- head(prices,251)
-Harga_Tanggal <- ymd(Harga$date)
-Hargadf <- (data.frame(Harga_Tanggal,Harga$close))
-Hargats <- xts(Harga$close,Harga_Tanggal)
+Harga <- na.omit(as.data.frame(Willis_Towers_Watson_Stock_Price_History))
+Harga_Tanggal <- ymd(Harga$Date)
+Hargadf <- ((data.frame(Harga_Tanggal,Harga$Price)))
+Hargats <- (xts(Harga$Price,Harga_Tanggal))
 summary(Hargats)
 
-plot_Harga <- ggplot(Harga, aes(x= date, y = close)) + geom_line(col="red")
+plot_Harga <- ggplot(Harga, aes(x= Date, y = Price)) + geom_line(col="red")
 plot_Harga
 ggplotly(plot_Harga)
 
 lambda <- BoxCox.lambda(Hargats)
-HargaBoxCox <- BoxCox(Hargats,lambda)
-adf.test(HargaBoxCox)
-Hargafinal <- na.omit(diff(HargaBoxCox),1)
+adf.test(Hargats)
+Hargafinal <- na.omit(diff(Hargats),1)
 adf.test(Hargafinal)
 
 eacf(Hargafinal)
@@ -32,6 +31,38 @@ arimaHarga13 <- arima(Hargafinal,order = c(9,1,0),method = "ML")
 arimaHarga14 <- arima(Hargafinal,order = c(10,1,0),method = "ML")
 arimaHarga15 <- arima(Hargafinal,order = c(11,1,0),method = "ML")
 
+coeftest(arimaHarga1)
+coeftest(arimaHarga2)
+coeftest(arimaHarga3)
+coeftest(arimaHarga4)
+coeftest(arimaHarga5)
+coeftest(arimaHarga6)
+coeftest(arimaHarga7)
+coeftest(arimaHarga8)
+coeftest(arimaHarga9)
+coeftest(arimaHarga10)
+coeftest(arimaHarga11)
+coeftest(arimaHarga12)
+coeftest(arimaHarga13)
+coeftest(arimaHarga14)
+coeftest(arimaHarga15)
+
+checkresiduals(arimaHarga1)
+checkresiduals(arimaHarga3)
+
+ksnormTest(((residuals(arimaHarga1))))
+ksnormTest(((residuals(arimaHarga3))))
+
+ksnormTest(acos(sqrt(residuals(arimaHarga1))))
+ksnormTest(acos(sqrt(residuals(arimaHarga3))))
+
+arimaHarga1
+arimaHarga3
+
+prediksi_Harga <- forecast(Hargats,model=arimaHarga1,h=90)
+plot(prediksi_Harga)
+
+summary(prediksi_Harga)
 coeftest(arimaHarga1)
 coeftest(arimaHarga2)
 coeftest(arimaHarga3)
