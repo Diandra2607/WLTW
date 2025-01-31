@@ -1,0 +1,2 @@
+# Background
+Willis Towers Watson (WTWL) is a global advisory, broking, and solutions company. They provide a range of services related to risk management, insurance, and human resources. Willis Towers Watson stock price forecast for February-March 2025 period using ARIMA will use Willis Towers Watson stock price data for November 2024-January 2025 period. This case study focuses on the Willis Tower Watsons stock price prediction for February-March 2025.
