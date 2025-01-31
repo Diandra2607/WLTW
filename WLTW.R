@@ -9,9 +9,9 @@ plot_Harga
 ggplotly(plot_Harga)
 
 lambda <- BoxCox.lambda(Hargats)
-adf.test(Hargats)
-Hargafinal <- na.omit(diff(Hargats),1)
-adf.test(Hargafinal)
+Hargats2 <- na.omit((Hargats^(lambda)-1)/lambda)
+adf.test(Hargats2)
+Hargafinal <- na.omit(diff(Hargats2),2))
 
 eacf(Hargafinal)
 
